@@ -1,7 +1,7 @@
 <div>
     {{-- Back + Header --}}
     <div class="flex items-center gap-3 mb-6">
-        <a href="{{ route('agent.fields.index') }}" class="btn-secondary py-2 px-3">
+        <a wire:navigate href="{{ route('agent.fields.index') }}" class="btn-secondary py-2 px-3">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         </a>
         <div>
@@ -31,15 +31,15 @@
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 mb-1">Days in Field</p>
-                            <p class="text-white font-medium">{{ $field->days_in_field }} days</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ $field->days_in_field }} days</p>
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 mb-1">Area</p>
-                            <p class="text-white font-medium">{{ $field->area_hectares ? $field->area_hectares . ' ha' : '—' }}</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ $field->area_hectares ? $field->area_hectares . ' ha' : '—' }}</p>
                         </div>
                         <div>
                             <p class="text-xs text-gray-500 mb-1">Planted</p>
-                            <p class="text-white font-medium">{{ $field->planting_date->format('d M Y') }}</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ $field->planting_date->format('d M Y') }}</p>
                         </div>
                         <div class="col-span-2 sm:col-span-3">
                             <p class="text-xs text-gray-500 mb-1">Description</p>
@@ -52,7 +52,7 @@
             {{-- Update Stage --}}
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-sm font-semibold text-white">Update Stage</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Update Stage</h3>
                 </div>
                 <div class="card-body">
                     @if(session('stage_success'))
@@ -79,7 +79,7 @@
             {{-- Add Observation --}}
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-sm font-semibold text-white">Add Observation</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Add Observation</h3>
                 </div>
                 <div class="card-body space-y-4">
                     @if(session('obs_success'))
@@ -112,7 +112,7 @@
         {{-- Right: Timeline --}}
         <div class="card h-fit">
             <div class="card-header">
-                <h3 class="text-sm font-semibold text-white">Observation History</h3>
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Observation History</h3>
                 <span class="text-xs text-gray-500">{{ $observations->count() }} total</span>
             </div>
             <div class="divide-y divide-gray-800 max-h-[600px] overflow-y-auto">

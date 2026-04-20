@@ -16,33 +16,33 @@
                         <span class="text-emerald-400 text-lg font-bold">{{ strtoupper(substr($agent->name, 0, 2)) }}</span>
                     </div>
                     <div>
-                        <p class="font-semibold text-white">{{ $agent->name }}</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ $agent->name }}</p>
                         <p class="text-xs text-gray-500">{{ $agent->email }}</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-3 text-center">
-                    <div class="bg-gray-800/60 rounded-xl p-2.5">
-                        <p class="text-xl font-bold text-white">{{ $agent->assigned_fields_count }}</p>
+                    <div class="bg-gray-100 dark:bg-gray-800/60 rounded-xl p-2.5">
+                        <p class="text-xl font-bold text-gray-900 dark:text-white">{{ $agent->assigned_fields_count }}</p>
                         <p class="text-xs text-gray-500">Fields</p>
                     </div>
                     <div class="bg-red-500/10 rounded-xl p-2.5">
                         <p class="text-xl font-bold text-red-400">{{ $atRisk }}</p>
                         <p class="text-xs text-gray-500">At Risk</p>
                     </div>
-                    <div class="bg-gray-800/60 rounded-xl p-2.5">
+                    <div class="bg-gray-100 dark:bg-gray-800/60 rounded-xl p-2.5">
                         <p class="text-xl font-bold text-gray-300">{{ $agent->assignedFields->sum(fn($f) => $f->observations->count()) }}</p>
                         <p class="text-xs text-gray-500">Updates</p>
                     </div>
                 </div>
                 @if($agent->assignedFields->isNotEmpty())
-                <div class="mt-4 pt-3 border-t border-gray-800">
+                <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
                     <p class="text-xs text-gray-500 mb-2">Assigned Fields</p>
                     <div class="flex flex-wrap gap-1.5">
                         @foreach($agent->assignedFields->take(4) as $field)
-                        <span class="text-xs px-2 py-0.5 bg-gray-800 text-gray-400 rounded-lg">{{ $field->name }}</span>
+                        <span class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-lg">{{ $field->name }}</span>
                         @endforeach
                         @if($agent->assignedFields->count() > 4)
-                        <span class="text-xs px-2 py-0.5 bg-gray-800 text-gray-500 rounded-lg">+{{ $agent->assignedFields->count() - 4 }} more</span>
+                        <span class="text-xs px-2 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-500 rounded-lg">+{{ $agent->assignedFields->count() - 4 }} more</span>
                         @endif
                     </div>
                 </div>

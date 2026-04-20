@@ -38,7 +38,7 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div class="card p-8">
     <div class="mb-7">
-        <h2 class="text-lg font-semibold text-white">Create an account</h2>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Create an account</h2>
         <p class="text-sm text-gray-500 mt-1">Join SmartSeason Field Monitoring</p>
     </div>
 

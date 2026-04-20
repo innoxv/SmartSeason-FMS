@@ -5,7 +5,7 @@
             <h2 class="page-title">Fields</h2>
             <p class="page-subtitle">Manage and monitor all registered fields</p>
         </div>
-        <a href="{{ route('admin.fields.create') }}" class="btn-primary">
+        <a wire:navigate href="{{ route('admin.fields.create') }}" class="btn-primary">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             New Field
         </a>
@@ -54,7 +54,7 @@
                     @forelse($fields as $field)
                     <tr>
                         <td>
-                            <p class="font-medium text-white">{{ $field->name }}</p>
+                            <p class="font-medium text-gray-900 dark:text-white">{{ $field->name }}</p>
                             <p class="text-xs text-gray-500">{{ $field->location }}</p>
                         </td>
                         <td>{{ $field->crop_type }}</td>
@@ -72,7 +72,7 @@
                         <td class="text-gray-400">{{ $field->agent?->name ?? '—' }}</td>
                         <td class="text-gray-400 text-center">{{ $field->observations->count() }}</td>
                         <td>
-                            <a href="{{ route('admin.fields.edit', $field) }}" class="btn-secondary text-xs py-1.5 px-3">Edit</a>
+                            <a wire:navigate href="{{ route('admin.fields.edit', $field) }}" class="btn-secondary text-xs py-1.5 px-3">Edit</a>
                         </td>
                     </tr>
                     @empty

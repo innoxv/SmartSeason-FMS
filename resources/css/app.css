@@ -4,6 +4,7 @@
 
 @layer base {
     body {
+        @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 font-inter antialiased min-h-screen transition-colors duration-200;
         font-family: 'Inter', sans-serif;
     }
 }
@@ -11,16 +12,17 @@
 @layer components {
     /* Sidebar Links */
     .sidebar-link {
-        @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-400
-               hover:bg-emerald-500/10 hover:text-emerald-300 transition-all duration-200 font-medium;
+        @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 dark:text-gray-400
+               hover:bg-emerald-50 hover:text-emerald-600 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300 transition-all duration-200 font-medium;
     }
     .sidebar-link.active {
-        @apply bg-emerald-500/15 text-emerald-300 shadow-sm;
+        @apply bg-emerald-50 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-300 shadow-sm;
     }
 
     /* Stats Cards */
     .stat-card {
-        @apply bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-emerald-500/30
+        @apply bg-white border border-gray-200 rounded-2xl p-5 hover:border-emerald-500/30
+               dark:bg-gray-900 dark:border-gray-800
                transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5;
     }
 
@@ -29,16 +31,16 @@
         @apply w-full text-sm text-left;
     }
     .data-table thead tr {
-        @apply border-b border-gray-800;
+        @apply border-b border-gray-200 dark:border-gray-800;
     }
     .data-table th {
-        @apply px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider;
+        @apply px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider;
     }
     .data-table tbody tr {
-        @apply border-b border-gray-800/50 hover:bg-gray-800/40 transition-colors duration-150;
+        @apply border-b border-gray-100 hover:bg-gray-50 dark:border-gray-800/50 dark:hover:bg-gray-800/40 transition-colors duration-150;
     }
     .data-table td {
-        @apply px-4 py-3.5 text-gray-300;
+        @apply px-4 py-3.5 text-gray-700 dark:text-gray-300;
     }
 
     /* Badges */
@@ -46,35 +48,36 @@
         @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
     }
     .badge-active {
-        @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+        @apply badge bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/20;
     }
     .badge-risk {
-        @apply badge bg-red-500/15 text-red-400 border border-red-500/20;
+        @apply badge bg-red-100 text-red-700 border border-red-200 dark:bg-red-500/15 dark:text-red-400 dark:border-red-500/20;
     }
     .badge-completed {
-        @apply badge bg-gray-500/15 text-gray-400 border border-gray-500/20;
+        @apply badge bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-500/15 dark:text-gray-400 dark:border-gray-500/20;
     }
     .badge-planted {
-        @apply badge bg-blue-500/15 text-blue-400 border border-blue-500/20;
+        @apply badge bg-blue-100 text-blue-700 border border-blue-200 dark:bg-blue-500/15 dark:text-blue-400 dark:border-blue-500/20;
     }
     .badge-growing {
-        @apply badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20;
+        @apply badge bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-400 dark:border-emerald-500/20;
     }
     .badge-ready {
-        @apply badge bg-amber-500/15 text-amber-400 border border-amber-500/20;
+        @apply badge bg-amber-100 text-amber-700 border border-amber-200 dark:bg-amber-500/15 dark:text-amber-400 dark:border-amber-500/20;
     }
     .badge-harvested {
-        @apply badge bg-gray-500/15 text-gray-400 border border-gray-500/20;
+        @apply badge bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-500/15 dark:text-gray-400 dark:border-gray-500/20;
     }
 
     /* Form Controls */
     .form-input {
-        @apply w-full bg-gray-800 border border-gray-700 text-gray-100 text-sm rounded-xl
+        @apply w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-xl
                px-4 py-2.5 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50
-               placeholder-gray-500 transition-colors duration-200;
+               placeholder-gray-400 transition-colors duration-200
+               dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 dark:placeholder-gray-500;
     }
     .form-label {
-        @apply block text-sm font-medium text-gray-300 mb-1.5;
+        @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5;
     }
     .form-select {
         @apply form-input appearance-none cursor-pointer;
@@ -91,22 +94,24 @@
                focus:outline-none focus:ring-2 focus:ring-emerald-500/50;
     }
     .btn-secondary {
-        @apply inline-flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-700
-               border border-gray-700 hover:border-gray-600 text-gray-300 hover:text-white
+        @apply inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-gray-50
+               border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900
+               dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700 dark:hover:border-gray-600 dark:text-gray-300 dark:hover:text-white
                text-sm font-semibold rounded-xl transition-all duration-200;
     }
     .btn-danger {
-        @apply inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20
-               border border-red-500/20 text-red-400 hover:text-red-300
+        @apply inline-flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100
+               border border-red-200 text-red-600 hover:text-red-700
+               dark:bg-red-500/10 dark:hover:bg-red-500/20 dark:border-red-500/20 dark:text-red-400 dark:hover:text-red-300
                text-sm font-semibold rounded-xl transition-all duration-200;
     }
 
     /* Cards */
     .card {
-        @apply bg-gray-900 border border-gray-800 rounded-2xl;
+        @apply bg-white border border-gray-200 rounded-2xl flex flex-col dark:bg-gray-900 dark:border-gray-800 transition-colors duration-200;
     }
     .card-header {
-        @apply px-6 py-4 border-b border-gray-800 flex items-center justify-between;
+        @apply px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between;
     }
     .card-body {
         @apply p-6;
@@ -114,9 +119,9 @@
 
     /* Page header */
     .page-title {
-        @apply text-2xl font-bold text-white;
+        @apply text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-200;
     }
     .page-subtitle {
-        @apply text-sm text-gray-400 mt-0.5;
+        @apply text-sm text-gray-500 dark:text-gray-400 mt-0.5;
     }
 }

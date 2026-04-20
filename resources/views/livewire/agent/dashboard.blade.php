@@ -3,7 +3,7 @@
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="stat-card">
             <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">My Fields</p>
-            <p class="text-3xl font-bold text-white">{{ $stats['total'] }}</p>
+            <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $stats['total'] }}</p>
             <p class="text-xs text-gray-500 mt-1">Assigned to you</p>
         </div>
         <div class="stat-card">
@@ -28,10 +28,10 @@
         <div class="xl:col-span-2 card">
             <div class="card-header">
                 <div>
-                    <h2 class="text-sm font-semibold text-white">My Assigned Fields</h2>
+                    <h2 class="text-sm font-semibold text-gray-900 dark:text-white">My Assigned Fields</h2>
                     <p class="text-xs text-gray-500">Fields you are responsible for</p>
                 </div>
-                <a href="{{ route('agent.fields.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
+                <a wire:navigate href="{{ route('agent.fields.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="data-table">
@@ -49,7 +49,7 @@
                         @forelse($fields as $field)
                         <tr>
                             <td>
-                                <p class="font-medium text-white">{{ $field->name }}</p>
+                                <p class="font-medium text-gray-900 dark:text-white">{{ $field->name }}</p>
                                 <p class="text-xs text-gray-500">{{ $field->location }}</p>
                             </td>
                             <td>{{ $field->crop_type }}</td>
@@ -64,7 +64,7 @@
                             </td>
                             <td class="text-gray-400 text-xs">{{ $field->days_in_field }}d</td>
                             <td>
-                                <a href="{{ route('agent.fields.show', $field) }}" class="btn-primary text-xs py-1.5 px-3">Update</a>
+                                <a wire:navigate href="{{ route('agent.fields.show', $field) }}" class="btn-primary text-xs py-1.5 px-3">Update</a>
                             </td>
                         </tr>
                         @empty
@@ -80,13 +80,13 @@
         {{-- Recent Activity --}}
         <div class="card">
             <div class="card-header">
-                <h2 class="text-sm font-semibold text-white">Recent Activity</h2>
+                <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
             </div>
             <div class="divide-y divide-gray-800">
                 @forelse($recentObservations as $obs)
                 <div class="px-5 py-3">
                     <div class="flex items-center justify-between mb-1">
-                        <p class="text-xs font-medium text-white">{{ $obs->field->name }}</p>
+                        <p class="text-xs font-medium text-gray-900 dark:text-white">{{ $obs->field->name }}</p>
                         @if($obs->is_risk_flag)
                         <span class="badge-risk">⚠ Risk</span>
                         @endif

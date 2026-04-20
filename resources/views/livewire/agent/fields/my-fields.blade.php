@@ -11,11 +11,11 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         @forelse($fields as $field)
-        <a href="{{ route('agent.fields.show', $field) }}" class="card block hover:border-emerald-500/30 transition-all duration-300 group">
+        <a wire:navigate href="{{ route('agent.fields.show', $field) }}" class="card block hover:border-emerald-500/30 transition-all duration-300 group">
             <div class="card-body">
                 <div class="flex items-start justify-between mb-3">
                     <div>
-                        <h3 class="font-semibold text-white group-hover:text-emerald-300 transition-colors">{{ $field->name }}</h3>
+                        <h3 class="font-semibold text-gray-900 dark:text-white group-hover:text-emerald-300 transition-colors">{{ $field->name }}</h3>
                         <p class="text-xs text-gray-500 mt-0.5">{{ $field->location }}</p>
                     </div>
                     <span class="{{ $field->status->badgeClass() }}">
@@ -31,16 +31,16 @@
                 </div>
 
                 <div class="grid grid-cols-3 gap-2 text-center">
-                    <div class="bg-gray-800/60 rounded-xl py-2">
-                        <p class="text-sm font-bold text-white">{{ $field->days_in_field }}</p>
+                    <div class="bg-gray-100 dark:bg-gray-800/60 rounded-xl py-2">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $field->days_in_field }}</p>
                         <p class="text-xs text-gray-600">Days</p>
                     </div>
-                    <div class="bg-gray-800/60 rounded-xl py-2">
-                        <p class="text-sm font-bold text-white">{{ $field->area_hectares ?? '—' }}</p>
+                    <div class="bg-gray-100 dark:bg-gray-800/60 rounded-xl py-2">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $field->area_hectares ?? '—' }}</p>
                         <p class="text-xs text-gray-600">Ha</p>
                     </div>
-                    <div class="bg-gray-800/60 rounded-xl py-2">
-                        <p class="text-sm font-bold text-white">{{ $field->observations->count() }}</p>
+                    <div class="bg-gray-100 dark:bg-gray-800/60 rounded-xl py-2">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">{{ $field->observations->count() }}</p>
                         <p class="text-xs text-gray-600">Notes</p>
                     </div>
                 </div>

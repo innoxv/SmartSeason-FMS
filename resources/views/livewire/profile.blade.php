@@ -7,7 +7,7 @@
     {{-- Profile Info --}}
     <div class="card">
         <div class="card-header">
-            <h3 class="text-sm font-semibold text-white">Account Details</h3>
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Account Details</h3>
         </div>
         <div class="card-body space-y-4">
             @if(session('profile_success'))
@@ -25,7 +25,7 @@
             </div>
             <div>
                 <label class="form-label">Role</label>
-                <p class="form-input bg-gray-800/50 text-gray-500 cursor-not-allowed">{{ auth()->user()->role->label() }}</p>
+                <p class="form-input bg-gray-100 dark:bg-gray-800/50 text-gray-500 cursor-not-allowed">{{ auth()->user()->role->label() }}</p>
             </div>
             <button wire:click="updateProfile" class="btn-primary">Save Changes</button>
         </div>
@@ -34,7 +34,7 @@
     {{-- Password --}}
     <div class="card">
         <div class="card-header">
-            <h3 class="text-sm font-semibold text-white">Change Password</h3>
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Change Password</h3>
         </div>
         <div class="card-body space-y-4">
             @if(session('password_success'))

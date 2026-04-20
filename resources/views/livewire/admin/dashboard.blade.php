@@ -10,7 +10,7 @@
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="stat-card">
             <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Total Fields</p>
-            <p class="text-3xl font-bold text-white">{{ $stats['total'] }}</p>
+            <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $stats['total'] }}</p>
             <p class="text-xs text-gray-500 mt-1">All registered fields</p>
         </div>
         <div class="stat-card">
@@ -35,10 +35,10 @@
         <div class="xl:col-span-2 card">
             <div class="card-header">
                 <div>
-                    <h2 class="text-sm font-semibold text-white">All Fields</h2>
+                    <h2 class="text-sm font-semibold text-gray-900 dark:text-white">All Fields</h2>
                     <p class="text-xs text-gray-500">Live overview across all agents</p>
                 </div>
-                <a href="{{ route('admin.fields.create') }}" class="btn-primary text-xs py-2 px-3">
+                <a wire:navigate href="{{ route('admin.fields.create') }}" class="btn-primary text-xs py-2 px-3">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     New Field
                 </a>
@@ -59,7 +59,7 @@
                         @forelse($fields->take(8) as $field)
                         <tr>
                             <td>
-                                <p class="font-medium text-white">{{ $field->name }}</p>
+                                <p class="font-medium text-gray-900 dark:text-white">{{ $field->name }}</p>
                                 <p class="text-xs text-gray-500">{{ $field->location }}</p>
                             </td>
                             <td>{{ $field->crop_type }}</td>
@@ -76,12 +76,12 @@
                             </td>
                             <td class="text-gray-400">{{ $field->agent?->name ?? '—' }}</td>
                             <td>
-                                <a href="{{ route('admin.fields.edit', $field) }}" class="text-emerald-400 hover:text-emerald-300 text-xs font-medium">Edit</a>
+                                <a wire:navigate href="{{ route('admin.fields.edit', $field) }}" class="text-emerald-400 hover:text-emerald-300 text-xs font-medium">Edit</a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center text-gray-500 py-8">No fields yet. <a href="{{ route('admin.fields.create') }}" class="text-emerald-400 hover:underline">Create one</a>.</td>
+                            <td colspan="6" class="text-center text-gray-500 py-8">No fields yet. <a wire:navigate href="{{ route('admin.fields.create') }}" class="text-emerald-400 hover:underline">Create one</a>.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -89,7 +89,7 @@
             </div>
             @if($fields->count() > 8)
             <div class="px-6 py-3 border-t border-gray-800">
-                <a href="{{ route('admin.fields.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all {{ $fields->count() }} fields →</a>
+                <a wire:navigate href="{{ route('admin.fields.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all {{ $fields->count() }} fields →</a>
             </div>
             @endif
         </div>
@@ -99,8 +99,8 @@
             {{-- Agents Overview --}}
             <div class="card">
                 <div class="card-header">
-                    <h2 class="text-sm font-semibold text-white">Field Agents</h2>
-                    <a href="{{ route('admin.agents.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
+                    <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Field Agents</h2>
+                    <a wire:navigate href="{{ route('admin.agents.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
                 </div>
                 <div class="divide-y divide-gray-800">
                     @forelse($agents as $agent)
@@ -110,7 +110,7 @@
                                 <span class="text-emerald-400 text-xs font-bold">{{ strtoupper(substr($agent->name, 0, 2)) }}</span>
                             </div>
                             <div>
-                                <p class="text-sm text-white font-medium">{{ $agent->name }}</p>
+                                <p class="text-sm text-gray-900 dark:text-white font-medium">{{ $agent->name }}</p>
                                 <p class="text-xs text-gray-500">{{ $agent->email }}</p>
                             </div>
                         </div>
@@ -125,13 +125,13 @@
             {{-- Recent Observations --}}
             <div class="card">
                 <div class="card-header">
-                    <h2 class="text-sm font-semibold text-white">Recent Updates</h2>
+                    <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Recent Updates</h2>
                 </div>
                 <div class="divide-y divide-gray-800">
                     @forelse($recentObservations as $obs)
                     <div class="px-5 py-3">
                         <div class="flex items-start justify-between gap-2 mb-1">
-                            <p class="text-xs font-medium text-white">{{ $obs->field->name }}</p>
+                            <p class="text-xs font-medium text-gray-900 dark:text-white">{{ $obs->field->name }}</p>
                             @if($obs->is_risk_flag)
                             <span class="badge-risk text-xs">⚠ Risk</span>
                             @endif
