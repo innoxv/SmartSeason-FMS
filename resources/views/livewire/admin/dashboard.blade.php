@@ -7,7 +7,7 @@
     @endif
 
     {{-- Stats --}}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="stat-card">
             <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Total Fields</p>
             <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $stats['total'] }}</p>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 max-h-[calc(100vh-96px)] overflow-hidden">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 xl:max-h-[calc(100vh-200px)] xl:overflow-hidden">
         {{-- Fields Table --}}
     <div class="xl:col-span-2 card flex flex-col">
             <div class="card-header">

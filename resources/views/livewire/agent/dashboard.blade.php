@@ -1,6 +1,6 @@
 <div>
     {{-- Stats --}}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="stat-card">
             <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">My Fields</p>
             <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ $stats['total'] }}</p>
