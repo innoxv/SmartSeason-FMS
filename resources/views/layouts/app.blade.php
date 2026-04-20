@@ -25,9 +25,9 @@
 
     {{-- Sidebar --}}
     <div class="flex min-h-screen">
-        <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-20 transition-colors duration-200">
+    <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-10 transition-colors duration-200">
             {{-- Logo --}}
-            <div class="px-6 py-5 border-b border-gray-200 dark:border-gray-800">
+            <div class="px-6 py-4 border-b-0">
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,7 +92,7 @@
         {{-- Main Content --}}
         <main class="flex-1 ml-64 min-h-screen">
             {{-- Top Bar --}}
-            <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800 px-8 py-4 sticky top-0 z-10 transition-colors duration-200">
+            <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800 px-8 py-4 sticky top-0 z-20 transition-colors duration-200">
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 class="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-200">{{ $header ?? 'Dashboard' }}</h1>

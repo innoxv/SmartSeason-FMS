@@ -88,10 +88,10 @@
 
     /* Buttons */
     .btn-primary {
-        @apply inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-green-600
-               hover:from-emerald-400 hover:to-green-500 text-white text-sm font-semibold rounded-xl
-               transition-all duration-200 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30
-               focus:outline-none focus:ring-2 focus:ring-emerald-500/50;
+     @apply inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500
+         hover:bg-emerald-400 text-white text-sm font-semibold rounded-xl
+         transition-all duration-200 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30
+         focus:outline-none focus:ring-2 focus:ring-emerald-500/50;
     }
     .btn-secondary {
         @apply inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-gray-50

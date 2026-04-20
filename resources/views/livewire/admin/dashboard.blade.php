@@ -30,9 +30,9 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 max-h-[calc(100vh-96px)] overflow-hidden">
         {{-- Fields Table --}}
-        <div class="xl:col-span-2 card">
+    <div class="xl:col-span-2 card flex flex-col">
             <div class="card-header">
                 <div>
                     <h2 class="text-sm font-semibold text-gray-900 dark:text-white">All Fields</h2>
@@ -43,7 +43,7 @@
                     New Field
                 </a>
             </div>
-            <div class="overflow-x-auto">
+            <div class="flex-1 overflow-auto overflow-x-auto">
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -95,14 +95,14 @@
         </div>
 
         {{-- Right Column --}}
-        <div class="space-y-6">
+    <div class="flex flex-col space-y-6 xl:col-span-1">
             {{-- Agents Overview --}}
-            <div class="card">
+            <div class="card flex flex-col">
                 <div class="card-header">
                     <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Field Agents</h2>
                     <a wire:navigate href="{{ route('admin.agents.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
                 </div>
-                <div class="divide-y divide-gray-800">
+                <div class="divide-y divide-gray-800 flex-1 overflow-auto pr-2">
                     @forelse($agents as $agent)
                     <div class="px-5 py-3 flex items-center justify-between">
                         <div class="flex items-center gap-3">
@@ -123,11 +123,11 @@
             </div>
 
             {{-- Recent Observations --}}
-            <div class="card">
+            <div class="card flex flex-col">
                 <div class="card-header">
                     <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Recent Updates</h2>
                 </div>
-                <div class="divide-y divide-gray-800">
+                <div class="divide-y divide-gray-800 flex-1 overflow-auto pr-2">
                     @forelse($recentObservations as $obs)
                     <div class="px-5 py-3">
                         <div class="flex items-start justify-between gap-2 mb-1">

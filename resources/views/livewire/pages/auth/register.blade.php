@@ -45,7 +45,7 @@ new #[Layout('layouts.guest')] class extends Component
     <form wire:submit="register" class="space-y-5">
         <div>
             <label for="name" class="form-label">Full Name</label>
-            <input wire:model="name" id="name" type="text" autocomplete="name" class="form-input" placeholder="Jane Wanjiku" autofocus>
+            <input wire:model="name" id="name" type="text" autocomplete="name" class="form-input" placeholder="Jane Doe" autofocus>
             @error('name') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
         </div>
 
