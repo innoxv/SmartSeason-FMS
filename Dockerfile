@@ -6,8 +6,10 @@ RUN npm ci
 
 FROM php:8.4-apache
 
+# Install npm in the PHP container
 RUN apt-get update && apt-get install -y \
     libpq-dev libzip-dev zip unzip git \
+    npm \
     && docker-php-ext-install pdo_pgsql zip
 
 RUN a2enmod rewrite
@@ -19,6 +21,7 @@ COPY . .
 
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+# Copy node_modules and run build (npm is now available)
 COPY --from=node /app/node_modules /var/www/html/node_modules
 RUN npm run build
 
