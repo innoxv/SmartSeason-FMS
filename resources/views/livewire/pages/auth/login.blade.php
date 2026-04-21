@@ -105,12 +105,12 @@ new #[Layout('layouts.guest')] class extends Component
     </div>
 
     {{-- Demo credentials --}}
-    <div class="p-4 border border-gray-200 dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-900/50">
+    <!-- <div class="p-4 border border-gray-200 dark:border-gray-800 rounded-2xl bg-white dark:bg-gray-900/50">
         <p class="text-xs text-gray-500 font-medium mb-2">Demo Credentials</p>
         <div class="space-y-1 text-xs text-gray-600">
             <p><span class="text-gray-400">Admin:</span> admin@smartseason.com / password</p>
             <p><span class="text-gray-400">Agent 1:</span> agent1@smartseason.com / password</p>
             <p><span class="text-gray-400">Agent 2:</span> agent2@smartseason.com / password</p>
         </div>
-    </div>
+    </div> -->
 </div>

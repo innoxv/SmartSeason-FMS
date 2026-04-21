@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between">
+                <div class="mt-4 pt-3 border-t border-gray-300 dark:border-gray-800 flex items-center justify-between">
                     <span class="text-xs text-gray-500">Planted {{ $field->planting_date->format('d M Y') }}</span>
                     <svg class="w-4 h-4 text-gray-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </div>

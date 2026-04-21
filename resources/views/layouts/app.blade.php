@@ -29,10 +29,32 @@
             {{-- Logo --}}
             <div class="px-6 py-4 border-b-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
-                        </svg>
+                    <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-green-600 rounded-md flex items-center justify-center shadow-lg">
+<svg class="w-8 h-8 text-white" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Left S -->
+    <path d="M4.5 10.5C4.5 7.8 6.5 5.5 10 5.5C13.5 5.5 15.5 7.8 15.5 10.5C15.5 13 13 14.8 10 16C7 17.2 4.5 19.5 4.5 22C4.5 24.5 6.5 26.5 10 26.5C13.5 26.5 15.5 24.5 15.5 22"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    
+    <!-- Center dot -->
+    <circle cx="20" cy="16" r="1.3" fill="currentColor"/>
+    
+    <!-- Right S -->
+    <path d="M35.5 10.5C35.5 7.8 33.5 5.5 30 5.5C26.5 5.5 24.5 7.8 24.5 10.5C24.5 13 27 14.8 30 16C33 17.2 35.5 19.5 35.5 22C35.5 24.5 33.5 26.5 30 26.5C26.5 26.5 24.5 24.5 24.5 22"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- FMS text -->
+    <text x="20" y="37" 
+          text-anchor="middle" 
+          font-size="10" 
+          font-weight="500" 
+          fill="currentColor"
+          font-family="sans-serif"
+          letter-spacing="1">
+        FMS
+    </text>
+
+</svg>
                     </div>
                     <div>
                         <span class="text-gray-900 dark:text-white font-semibold text-sm leading-tight block">SmartSeason</span>

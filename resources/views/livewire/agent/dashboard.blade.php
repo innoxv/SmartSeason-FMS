@@ -82,13 +82,13 @@
             <div class="card-header">
                 <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
             </div>
-            <div class="divide-y divide-gray-800">
+            <div>
                 @forelse($recentObservations as $obs)
-                <div class="px-5 py-3">
+                <div class="px-5 py-3 {{ !$loop->last ? 'border-b border-gray-200 dark:border-gray-800' : '' }}">
                     <div class="flex items-center justify-between mb-1">
                         <p class="text-xs font-medium text-gray-900 dark:text-white">{{ $obs->field->name }}</p>
                         @if($obs->is_risk_flag)
-                        <span class="badge-risk">⚠ Risk</span>
+                        <span class="badge-risk">Risk</span>
                         @endif
                     </div>
                     <p class="text-xs text-gray-400 line-clamp-2">{{ $obs->notes }}</p>

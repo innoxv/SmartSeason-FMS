@@ -95,16 +95,16 @@
         </div>
 
         {{-- Right Column --}}
-    <div class="flex flex-col space-y-6 xl:col-span-1">
+        <div class="flex flex-col space-y-6 xl:col-span-1">
             {{-- Agents Overview --}}
             <div class="card flex flex-col">
                 <div class="card-header">
                     <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Field Agents</h2>
                     <a wire:navigate href="{{ route('admin.agents.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
                 </div>
-                <div class="divide-y divide-gray-800 flex-1 overflow-auto pr-2">
+                <div class="flex-1 overflow-auto pr-2">
                     @forelse($agents as $agent)
-                    <div class="px-5 py-3 flex items-center justify-between">
+                    <div class="px-5 py-3 flex items-center justify-between {{ !$loop->last ? 'border-b border-gray-200 dark:border-gray-800' : '' }}">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
                                 <span class="text-emerald-400 text-xs font-bold">{{ strtoupper(substr($agent->name, 0, 2)) }}</span>
@@ -127,17 +127,17 @@
                 <div class="card-header">
                     <h2 class="text-sm font-semibold text-gray-900 dark:text-white">Recent Updates</h2>
                 </div>
-                <div class="divide-y divide-gray-800 flex-1 overflow-auto pr-2">
+                <div class="flex-1 overflow-auto pr-2">
                     @forelse($recentObservations as $obs)
-                    <div class="px-5 py-3">
+                    <div class="px-5 py-3 {{ !$loop->last ? 'border-b border-gray-200 dark:border-gray-800' : '' }}">
                         <div class="flex items-start justify-between gap-2 mb-1">
                             <p class="text-xs font-medium text-gray-900 dark:text-white">{{ $obs->field->name }}</p>
                             @if($obs->is_risk_flag)
-                            <span class="badge-risk text-xs">⚠ Risk</span>
+                            <span class="badge-risk text-xs">Risk</span>
                             @endif
                         </div>
-                        <p class="text-xs text-gray-400 line-clamp-2">{{ $obs->notes }}</p>
-                        <p class="text-xs text-gray-600 mt-1">{{ $obs->user->name }} · {{ $obs->created_at->diffForHumans() }}</p>
+                        <p class="text-xs text-gray-800 dark:text-gray-400 line-clamp-2">{{ $obs->notes }}</p>
+                        <p class="text-xs text-gray-600 dark:text-gray-500 mt-1">{{ $obs->user->name }} · {{ $obs->created_at->diffForHumans() }}</p>
                     </div>
                     @empty
                     <p class="px-5 py-4 text-sm text-gray-500">No observations yet.</p>

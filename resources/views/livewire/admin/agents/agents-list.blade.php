@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 @if($agent->assignedFields->isNotEmpty())
-                <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+                <div class="mt-4 pt-3 border-t border-gray-200 dark:border-gray-800">
                     <p class="text-xs text-gray-500 mb-2">Assigned Fields</p>
                     <div class="flex flex-wrap gap-1.5">
                         @foreach($agent->assignedFields->take(4) as $field)

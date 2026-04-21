@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-span-2 sm:col-span-3">
                             <p class="text-xs text-gray-500 mb-1">Description</p>
-                            <p class="text-gray-300 text-sm">{{ $field->description ?? '—' }}</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ $field->description ?? '—' }}</p>
                         </div>
                     </div>
                 </div>
@@ -119,15 +119,15 @@
                 @forelse($observations as $obs)
                 <div class="px-5 py-4">
                     <div class="flex items-start justify-between gap-2 mb-2">
-                        <p class="text-xs font-medium text-gray-300">{{ $obs->user->name }}</p>
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-500">{{ $obs->user->name }}</p>
                         @if($obs->is_risk_flag)
-                        <span class="badge-risk flex-shrink-0">⚠ Risk</span>
+                        <span class="badge-risk flex-shrink-0">  Risk</span>
                         @endif
                     </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">{{ $obs->notes }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{{ $obs->notes }}</p>
                     <div class="flex items-center gap-2 mt-2">
                         <span class="badge badge-{{ $obs->stage_at_time }}">{{ \App\Enums\FieldStage::from($obs->stage_at_time)->label() }}</span>
-                        <span class="text-xs text-gray-600">{{ $obs->created_at->format('d M Y, H:i') }}</span>
+                        <span class="text-xs text-gray-500">{{ $obs->created_at->format('d M Y, H:i') }}</span>
                     </div>
                 </div>
                 @empty
