@@ -43,6 +43,11 @@
         @apply px-4 py-3.5 text-gray-700 dark:text-gray-300;
     }
 
+    /* Table responsive wrapper: use on a container around tables to enable inline horizontal scrolling on small screens */
+    .table-responsive {
+        @apply overflow-x-auto;
+    }
+
     /* Badges */
     .badge {
         @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold;
