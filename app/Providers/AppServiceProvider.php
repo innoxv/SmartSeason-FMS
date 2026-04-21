@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Vite;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
         if (env('APP_ENV') == 'production') {
             $this->app['request']->server->set('HTTPS', true);
+            
+            // Tell Vite where to find the manifest
+            Vite::useBuildDirectory('build');
         }
     }
 }
