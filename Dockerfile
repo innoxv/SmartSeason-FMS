@@ -11,7 +11,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
-RUN composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-req=ext-zip
+# Debug: Show what's in the directory
+RUN ls -la
+
+# Debug: Show composer.json
+RUN cat composer.json
+
+# Debug: Run composer with full verbosity
+RUN composer install --verbose --no-interaction --optimize-autoloader --no-dev 2>&1
 
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
