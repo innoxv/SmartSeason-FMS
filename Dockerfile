@@ -1,3 +1,9 @@
+FROM node:20-slim AS node
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
 FROM php:8.4-apache
 
 RUN apt-get update && apt-get install -y \
@@ -11,9 +17,21 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
+# Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+# Copy node_modules from node stage
+COPY --from=node /app/node_modules /var/www/html/node_modules
+
+# Build Vite assets
+RUN npm run build
+
+# Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
+
+# Configure Apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
