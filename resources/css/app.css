@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 font-inter antialiased min-h-screen transition-colors duration-200;
+        @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 font-inter antialiased min-h-screen transition-colors duration-200 overflow-x-hidden;
         font-family: 'Inter', sans-serif;
     }
 }
@@ -45,8 +45,34 @@
 
     /* Table responsive wrapper: use on a container around tables to enable inline horizontal scrolling on small screens */
     .table-responsive {
-        @apply overflow-x-auto;
+        @apply overflow-x-auto max-w-full;
+        -webkit-overflow-scrolling: touch;
+        /* allow vertical content (e.g., pagination) to show */
+        overflow-y: visible;
     }
+
+        /* Sidebar toggle icon visibility control */
+        #sidebar-toggle .icon-close {
+            display: none;
+        }
+        #sidebar-toggle.open .icon-close {
+            display: block;
+        }
+        #sidebar-toggle.open .icon-open {
+            display: none;
+        }
+
+        /* Optional truncation helper for tables that should clamp cells */
+        .data-table-truncate {
+            table-layout: fixed;
+            width: 100%;
+        }
+        .data-table-truncate th,
+        .data-table-truncate td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
     /* Badges */
     .badge {
@@ -129,4 +155,15 @@
     .page-subtitle {
         @apply text-sm text-gray-500 dark:text-gray-400 mt-0.5;
     }
+}
+
+/* Ensure tables take at least the container width and overflow internally when wider than viewport */
+.data-table {
+    min-width: 100%;
+}
+
+/* Allow specific tables to wrap cell content instead of clamping */
+.data-table-wrap th,
+.data-table-wrap td {
+    white-space: normal;
 }

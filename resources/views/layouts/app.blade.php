@@ -122,9 +122,9 @@
                     <div class="flex items-center">
                         <!-- Mobile hamburger to toggle sidebar -->
                         <button id="sidebar-toggle" class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors me-3" aria-label="Toggle sidebar">
-                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                <path class="icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                <path class="icon-close" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
 
@@ -165,49 +165,74 @@
 
     @livewireScripts
     <script>
-        // Fallback JS for sidebar toggle in case Alpine is not available.
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('sidebar-toggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
+        // Robust sidebar init that re-runs after Livewire navigations.
+        (function () {
+            function initSidebar() {
+                const btn = document.getElementById('sidebar-toggle');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('mobile-overlay');
 
-            if (!btn || !sidebar || !overlay) return;
+                if (!btn || !sidebar || !overlay) return;
 
-            const setMobileClosed = () => {
-                sidebar.classList.remove('translate-x-0');
-                overlay.style.display = 'none';
-            };
+                // Remove previous handlers if present to avoid duplicates
+                if (btn._sidebarClickHandler) btn.removeEventListener('click', btn._sidebarClickHandler);
+                if (overlay._sidebarOverlayHandler) overlay.removeEventListener('click', overlay._sidebarOverlayHandler);
+                if (window._sidebarResizeHandler) window.removeEventListener('resize', window._sidebarResizeHandler);
 
-            const setDesktopOpen = () => {
-                sidebar.classList.add('translate-x-0');
-                overlay.style.display = 'none';
-            };
+                const setMobileClosed = () => {
+                    sidebar.classList.remove('translate-x-0');
+                    overlay.style.display = 'none';
+                    btn.classList.remove('open');
+                };
 
-            // Initial state based on viewport
-            if (window.innerWidth >= 640) {
-                setDesktopOpen();
-            } else {
-                setMobileClosed();
-            }
+                const setDesktopOpen = () => {
+                    sidebar.classList.add('translate-x-0');
+                    overlay.style.display = 'none';
+                    btn.classList.remove('open');
+                };
 
-            btn.addEventListener('click', function () {
-                const isOpen = sidebar.classList.toggle('translate-x-0');
-                overlay.style.display = isOpen ? 'block' : 'none';
-            });
-
-            overlay.addEventListener('click', function () {
-                setMobileClosed();
-            });
-
-            // Keep state consistent on resize
-            window.addEventListener('resize', function () {
+                // Initial state based on viewport
                 if (window.innerWidth >= 640) {
                     setDesktopOpen();
                 } else {
                     setMobileClosed();
                 }
-            });
-        });
+
+                // Debounced click handler to avoid double activations (touch/multi-click)
+                btn._sidebarClickHandler = function (e) {
+                    if (btn.disabled) return;
+                    btn.disabled = true;
+                    const isOpen = sidebar.classList.toggle('translate-x-0');
+                    overlay.style.display = isOpen ? 'block' : 'none';
+                    if (isOpen) btn.classList.add('open'); else btn.classList.remove('open');
+                    setTimeout(function () { btn.disabled = false; }, 250);
+                };
+                btn.addEventListener('click', btn._sidebarClickHandler);
+
+                overlay._sidebarOverlayHandler = function () {
+                    setMobileClosed();
+                };
+                overlay.addEventListener('click', overlay._sidebarOverlayHandler);
+
+                window._sidebarResizeHandler = function () {
+                    if (window.innerWidth >= 640) {
+                        setDesktopOpen();
+                    } else {
+                        setMobileClosed();
+                    }
+                };
+                window.addEventListener('resize', window._sidebarResizeHandler);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSidebar);
+            } else {
+                initSidebar();
+            }
+
+            // Re-init after Livewire navigation so handlers stay attached
+            document.addEventListener('livewire:navigated', initSidebar);
+        })();
     </script>
 </body>
 </html>

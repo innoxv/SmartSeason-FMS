@@ -33,7 +33,7 @@
                 </div>
                 <a wire:navigate href="{{ route('agent.fields.index') }}" class="text-xs text-emerald-400 hover:text-emerald-300">View all</a>
             </div>
-            <div class="overflow-x-auto">
+            <div class="table-responsive">
                 <table class="data-table">
                     <thead>
                         <tr>
