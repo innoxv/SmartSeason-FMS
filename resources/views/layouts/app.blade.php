@@ -25,7 +25,7 @@
 
     {{-- Sidebar --}}
     <div class="flex min-h-screen">
-    <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-10 transition-colors duration-200">
+    <aside id="sidebar" class="fixed h-full z-40 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col transform -translate-x-full sm:translate-x-0 transition-transform duration-200">
             {{-- Logo --}}
             <div class="px-6 py-4 border-b-0">
                 <div class="flex items-center gap-3">
@@ -109,16 +109,29 @@
                     </button>
                 </form>
             </div>
-        </aside>
+    </aside>
 
-        {{-- Main Content --}}
-        <main class="flex-1 ml-64 min-h-screen">
+    {{-- Overlay for mobile when sidebar is open --}}
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/40 z-30 sm:hidden" style="display: none;"></div>
+
+    {{-- Main Content --}}
+    <main class="flex-1 ml-0 sm:ml-64 min-h-screen">
             {{-- Top Bar --}}
             <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800 px-8 py-4 sticky top-0 z-20 transition-colors duration-200">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-200">{{ $header ?? 'Dashboard' }}</h1>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ now()->format('l, F j Y') }}</p>
+                    <div class="flex items-center">
+                        <!-- Mobile hamburger to toggle sidebar -->
+                        <button id="sidebar-toggle" class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors me-3" aria-label="Toggle sidebar">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                <path class="icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                <path class="icon-close" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <div>
+                            <h1 class="text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-200">{{ $header ?? 'Dashboard' }}</h1>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ now()->format('l, F j Y') }}</p>
+                        </div>
                     </div>
                     <div class="flex items-center gap-4">
                         {{-- Theme Toggle --}}
@@ -151,5 +164,75 @@
     </div>
 
     @livewireScripts
+    <script>
+        // Robust sidebar init that re-runs after Livewire navigations.
+        (function () {
+            function initSidebar() {
+                const btn = document.getElementById('sidebar-toggle');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('mobile-overlay');
+
+                if (!btn || !sidebar || !overlay) return;
+
+                // Remove previous handlers if present to avoid duplicates
+                if (btn._sidebarClickHandler) btn.removeEventListener('click', btn._sidebarClickHandler);
+                if (overlay._sidebarOverlayHandler) overlay.removeEventListener('click', overlay._sidebarOverlayHandler);
+                if (window._sidebarResizeHandler) window.removeEventListener('resize', window._sidebarResizeHandler);
+
+                const setMobileClosed = () => {
+                    sidebar.classList.remove('translate-x-0');
+                    overlay.style.display = 'none';
+                    btn.classList.remove('open');
+                };
+
+                const setDesktopOpen = () => {
+                    sidebar.classList.add('translate-x-0');
+                    overlay.style.display = 'none';
+                    btn.classList.remove('open');
+                };
+
+                // Initial state based on viewport
+                if (window.innerWidth >= 640) {
+                    setDesktopOpen();
+                } else {
+                    setMobileClosed();
+                }
+
+                // Debounced click handler to avoid double activations (touch/multi-click)
+                btn._sidebarClickHandler = function (e) {
+                    if (btn.disabled) return;
+                    btn.disabled = true;
+                    const isOpen = sidebar.classList.toggle('translate-x-0');
+                    overlay.style.display = isOpen ? 'block' : 'none';
+                    if (isOpen) btn.classList.add('open'); else btn.classList.remove('open');
+                    setTimeout(function () { btn.disabled = false; }, 250);
+                };
+                btn.addEventListener('click', btn._sidebarClickHandler);
+
+                overlay._sidebarOverlayHandler = function () {
+                    setMobileClosed();
+                };
+                overlay.addEventListener('click', overlay._sidebarOverlayHandler);
+
+                window._sidebarResizeHandler = function () {
+                    if (window.innerWidth >= 640) {
+                        setDesktopOpen();
+                    } else {
+                        setMobileClosed();
+                    }
+                };
+                window.addEventListener('resize', window._sidebarResizeHandler);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSidebar);
+            } else {
+                initSidebar();
+            }
+
+            // Re-init after Livewire navigation so handlers stay attached
+            document.addEventListener('livewire:navigated', initSidebar);
+        })();
+    </script>
 </body>
 </html>

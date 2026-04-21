@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 max-h-[calc(100vh-96px)] overflow-hidden">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 max-h-[calc(100vh-96px)] overflow-auto">
         {{-- Fields Table --}}
     <div class="xl:col-span-2 card flex flex-col">
             <div class="card-header">
@@ -43,7 +43,7 @@
                     New Field
                 </a>
             </div>
-            <div class="flex-1 overflow-auto overflow-x-auto">
+            <div class="flex-1 overflow-auto table-responsive">
                 <table class="data-table">
                     <thead>
                         <tr>
