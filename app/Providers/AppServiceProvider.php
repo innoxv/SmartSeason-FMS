@@ -7,24 +7,22 @@ use Illuminate\Support\Facades\Vite;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot()
     {
         if (env('APP_ENV') == 'production') {
             $this->app['request']->server->set('HTTPS', true);
             
-            // Tell Vite where to find the manifest
-            Vite::useBuildDirectory('build');
+            // Check if manifest is in .vite subdirectory
+            if (file_exists(public_path('build/.vite/manifest.json'))) {
+                Vite::useBuildDirectory('build/.vite');
+            } else {
+                Vite::useBuildDirectory('build');
+            }
         }
     }
 }
