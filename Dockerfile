@@ -1,9 +1,13 @@
+FROM node:20-slim AS node
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
 FROM php:8.4-apache
 
-# Install system dependencies including npm
 RUN apt-get update && apt-get install -y \
     libpq-dev libzip-dev zip unzip git \
-    npm \
     && docker-php-ext-install pdo_pgsql zip
 
 RUN a2enmod rewrite
@@ -13,17 +17,17 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 
-# Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Install npm dependencies and build
-RUN npm install && npm run build
+COPY --from=node /app/node_modules /var/www/html/node_modules
+RUN npm run build
 
-# Set permissions
-RUN chown -R www-data:www-data storage bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
+# Create manifest symlink for Vite
+RUN if [ -f public/build/.vite/manifest.json ]; then cp public/build/.vite/manifest.json public/build/manifest.json; fi
 
-# Configure Apache
+RUN chown -R www-data:www-data storage bootstrap/cache public/build
+RUN chmod -R 775 storage bootstrap/cache public/build
+
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 

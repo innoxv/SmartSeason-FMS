@@ -16,13 +16,9 @@ class AppServiceProvider extends ServiceProvider
     {
         if (env('APP_ENV') == 'production') {
             $this->app['request']->server->set('HTTPS', true);
-            
-            // Check if manifest is in .vite subdirectory
-            if (file_exists(public_path('build/.vite/manifest.json'))) {
-                Vite::useBuildDirectory('build/.vite');
-            } else {
-                Vite::useBuildDirectory('build');
-            }
         }
+        
+        // Fix Vite manifest path
+        Vite::useBuildDirectory('build');
     }
 }
