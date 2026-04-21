@@ -1,13 +1,9 @@
-FROM node:20-slim AS node
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-
 FROM php:8.4-apache
 
+# Install system dependencies including npm
 RUN apt-get update && apt-get install -y \
     libpq-dev libzip-dev zip unzip git \
+    npm \
     && docker-php-ext-install pdo_pgsql zip
 
 RUN a2enmod rewrite
@@ -20,11 +16,8 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Copy node_modules from node stage
-COPY --from=node /app/node_modules /var/www/html/node_modules
-
-# Build Vite assets
-RUN npm run build
+# Install npm dependencies and build
+RUN npm install && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
