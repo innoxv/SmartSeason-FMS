@@ -47,7 +47,7 @@
             </div>
             <div class="hidden sm:flex flex-col leading-none">
                 <span class="text-sm font-bold tracking-tight text-gray-800 dark:text-white">SmartSeason</span>
-                <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400 tracking-[0.2em] transform scale-y-95 origin-left">Field Monitoring System</span>
+                <span class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Field Monitoring System</span>
             </div>
         </a>
 
