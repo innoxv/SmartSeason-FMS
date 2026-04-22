@@ -47,6 +47,24 @@ Route::middleware(['auth', 'verified', 'agent'])->prefix('agent')->name('agent.'
 Route::get('/profile', Profile::class)->middleware(['auth'])->name('profile');
 
 // Health Check Route
+Route::get('/db-health', function () {
+    try {
+        DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'ok',
+            'database' => 'connected',
+            'timestamp' => now()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'database' => 'disconnected',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
+// Debug Route
 Route::get('/debug-info', function () {
     try {
         DB::connection()->getPdo();
