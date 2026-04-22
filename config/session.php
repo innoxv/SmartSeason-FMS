@@ -156,7 +156,9 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN') === 'null' ? null : env('SESSION_DOMAIN'),
+    'domain' => (env('SESSION_DOMAIN') === 'null' || env('SESSION_DOMAIN') === '.onrender.com') 
+        ? null 
+        : env('SESSION_DOMAIN'),
 
     /*
     |--------------------------------------------------------------------------
