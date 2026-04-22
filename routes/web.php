@@ -47,12 +47,18 @@ Route::middleware(['auth', 'verified', 'agent'])->prefix('agent')->name('agent.'
 Route::get('/profile', Profile::class)->middleware(['auth'])->name('profile');
 
 // Health Check Route
-Route::get('/db-health', function () {
+Route::get('/debug-info', function () {
     try {
         DB::connection()->getPdo();
         return response()->json([
             'status' => 'ok',
+            'env' => app()->environment(),
+            'session_driver' => config('session.driver'),
+            'session_secure' => config('session.secure'),
+            'cookie_domain' => config('session.domain'),
+            'app_url' => config('app.url'),
             'database' => 'connected',
+            'schema' => config('database.connections.pgsql.search_path'),
             'timestamp' => now()
         ]);
     } catch (\Exception $e) {
