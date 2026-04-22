@@ -155,6 +155,11 @@
     .page-subtitle {
         @apply text-sm text-gray-500 dark:text-gray-400 mt-0.5;
     }
+
+    /* Livewire SPA Loading Bar */
+    .livewire-progressive-bar {
+        @apply bg-emerald-500 !important;
+    }
 }
 
 /* Ensure tables take at least the container width and overflow internally when wider than viewport */

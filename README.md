@@ -8,13 +8,14 @@ Built with **Laravel 11**, **Livewire 3**, **Tailwind CSS**, and **PostgreSQL**.
 
 ## Tech Stack
 
-| Layer      | Technology                      |
-|------------|---------------------------------|
-| Backend    | Laravel 11                      |
-| Frontend   | Livewire 3 + Volt               |
-| Styling    | Tailwind CSS v4                 |
-| Database   | PostgreSQL                      |
-| Auth       | Laravel Breeze (Livewire stack) |
+| Layer      | Technology                          |
+|------------|-------------------------------------|
+| Backend    | Laravel 11                          |
+| Frontend   | Livewire 3 + Volt                   |
+| Styling    | Tailwind CSS v4                     |
+| Database   | PostgreSQL (Supabase)               |
+| Hosting    | Render (Web Service via Docker)     |
+| Auth       | Laravel Breeze (Livewire stack)     |
 
 ---
 
@@ -99,11 +100,37 @@ Visit: **http://localhost:8000**
 
 ## Demo Credentials
 
-| Role        | Email                     | Password |
-|-------------|---------------------------|----------|
-| Admin       | admin@smartseason.com     | password |
-| Field Agent | agent1@smartseason.com    | password |
-| Field Agent | agent2@smartseason.com    | password |
+| Role        | Email                     | Password    |
+|-------------|---------------------------|-------------|
+| Admin       | admin@smartseason.com     | figureitout |
+| Field Agent | agent1@smartseason.com    | figureitout |
+| Field Agent | agent2@smartseason.com    | figureitout |
+
+---
+
+## Deployment
+
+The application is configured for production deployment on **Render** (Web Service) using **Docker**, with a **Supabase** PostgreSQL database.
+
+### 1. Database (Supabase)
+- **Role**: Managed PostgreSQL hosting.
+- **Config**: Ensure `DB_CONNECTION=pgsql` and `DB_URL` are set correctly in your environment variables.
+- **Schema**: The application is configured to use the `laravel` schema on Supabase (configured in `config/database.php`).
+
+### 2. Web Service (Render)
+- **Runtime**: Docker
+- **Environment Variables**:
+    - `APP_ENV=production`
+    - `APP_URL=https://your-app-name.onrender.com`
+    - `SESSION_DRIVER=database`
+    - `SESSION_SECURE_COOKIE=true`
+    - `SESSION_DOMAIN=null` (Leave empty to avoid Public Suffix List rejection on `onrender.com`)
+
+### 3. Production Optimizations
+The following configurations have been applied for seamless production performance:
+- **Proxy Trust**: Configured in `bootstrap/app.php` to handle Render's load balancer.
+- **HTTPS Enforcement**: Strictly enforced via `URL::forceScheme('https')` in `AppServiceProvider`.
+- **Session Security**: Cookies are marked as `Secure` and restricted to the specific application subdomain to prevent browser rejection.
 
 ---
 

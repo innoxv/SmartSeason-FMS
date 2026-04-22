@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $admin = User::create([
             'name'     => 'Admin Coordinator',
             'email'    => 'admin@smartseason.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('figureitout'),
             'role'     => UserRole::Admin->value,
         ]);
 
@@ -26,14 +26,14 @@ class DatabaseSeeder extends Seeder
         $agent1 = User::create([
             'name'     => 'Jane Wanjiku',
             'email'    => 'agent1@smartseason.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('figureitout'),
             'role'     => UserRole::Agent->value,
         ]);
 
         $agent2 = User::create([
             'name'     => 'Brian Ochieng',
             'email'    => 'agent2@smartseason.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('figureitout'),
             'role'     => UserRole::Agent->value,
         ]);
 
